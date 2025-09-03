@@ -8,11 +8,11 @@ model = joblib.load("admission_model.pkl")
 st.title("🎓 Graduate Admission Prediction App")
 
 # --- User Inputs ---
-gre = st.number_input("GRE Score (260 - 340)", min_value=260, max_value=340, step=1)
-toefl = st.number_input("TOEFL Score (0 - 120)", min_value=0, max_value=120, step=1)
+gre = st.number_input("GRE (Graduate Record Examination)  Score (260 - 340)", min_value=260, max_value=340, step=1)
+toefl = st.number_input("TOEFL (Test of English as a Foreign Language) Score (0 - 120)", min_value=0, max_value=120, step=1)
 uni_rating = st.slider("University Rating (1-5)", 1, 5)
-sop = st.slider("SOP Strength (1-5)", 1.0, 5.0, step=0.5)
-lor = st.slider("LOR Strength (1-5)", 1.0, 5.0, step=0.5)
+sop = st.slider("SOP (Statement of Purpose) Strength (1-5)", 1.0, 5.0, step=0.5)
+lor = st.slider("LOR (Letter of Recommendation) Strength (1-5)", 1.0, 5.0, step=0.5)
 cgpa = st.number_input("CGPA (out of 10)", min_value=0.0, max_value=10.0, step=0.1)
 research = st.radio("Research Experience", ["No", "Yes"])
 research_val = 1 if research == "Yes" else 0
@@ -22,15 +22,15 @@ if st.button("Predict Admission Chance"):
     # --- Input validation ---
     missing_fields = []
     if gre == 0:
-        missing_fields.append("GRE(Graduate Record Examination) Score")
+        missing_fields.append("GRE Score")
     if toefl == 0:
-        missing_fields.append("TOEFL(Test of English as a Foreign Language) Score")
+        missing_fields.append("TOEFL Score")
     if uni_rating == 0:
         missing_fields.append("University Rating")
     if sop == 0:
-        missing_fields.append("SOP(Statement of Purpose) Strength")
+        missing_fields.append("SOP Strength")
     if lor == 0:
-        missing_fields.append("LOR(Letter of Recommendation) Strength")
+        missing_fields.append("LOR Strength")
     if cgpa == 0:
         missing_fields.append("CGPA")
     if research not in ["Yes", "No"]:
