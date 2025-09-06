@@ -10,7 +10,7 @@ model = joblib.load("admission_model1.pkl")
 # Load dataset (same used for training)
 data = pd.read_csv("Admission_Predict_Ver1.1.csv")
 
-st.title("🎓 Graduate Admission Prediction App")
+st.title("🎓 Graduate Admission Prediction")
 
 # --- User Inputs ---
 gre = st.number_input("GRE (Graduate Record Examination) (260 - 340)", min_value=260, max_value=340, step=1)
