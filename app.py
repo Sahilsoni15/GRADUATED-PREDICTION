@@ -1,18 +1,23 @@
 import streamlit as st
 import numpy as np
 import joblib
+import matplotlib.pyplot as plt
+import pandas as pd
 
 # Load trained model
-model = joblib.load("admission_model.pkl")
+model = joblib.load("admission_model1.pkl")
+
+# Load dataset (same used for training)
+data = pd.read_csv("Admission_Predict_Ver1.1.csv")
 
 st.title("🎓 Graduate Admission Prediction App")
 
 # --- User Inputs ---
-gre = st.number_input("GRE (Graduate Record Examination)  Score (260 - 340)", min_value=260, max_value=340, step=1)
-toefl = st.number_input("TOEFL (Test of English as a Foreign Language) Score (0 - 120)", min_value=0, max_value=120, step=1)
+gre = st.number_input("GRE Score (260 - 340)", min_value=260, max_value=340, step=1)
+toefl = st.number_input("TOEFL Score (0 - 120)", min_value=0, max_value=120, step=1)
 uni_rating = st.slider("University Rating (1-5)", 1, 5)
-sop = st.slider("SOP (Statement of Purpose) Strength (1-5)", 1.0, 5.0, step=0.5)
-lor = st.slider("LOR (Letter of Recommendation) Strength (1-5)", 1.0, 5.0, step=0.5)
+sop = st.slider("SOP Strength (1-5)", 1.0, 5.0, step=0.5)
+lor = st.slider("LOR Strength (1-5)", 1.0, 5.0, step=0.5)
 cgpa = st.number_input("CGPA (out of 10)", min_value=0.0, max_value=10.0, step=0.1)
 research = st.radio("Research Experience", ["No", "Yes"])
 research_val = 1 if research == "Yes" else 0
@@ -74,3 +79,32 @@ if st.button("Predict Admission Chance"):
             st.warning(f"⚠️ Moderate chance ({percentage}%). Improve SOP, LOR, or Research for better results.")
         else:
             st.error(f"❌ Not Possible. Only {percentage}%. Work on improving your profile.")
+
+        # --- Comparison with Actual Value from Dataset (Closest Match) ---
+        row = data.copy()
+
+        # Compute Euclidean distance to find closest match
+        row["distance"] = (
+            (row["GRE Score"] - gre) ** 2 +
+            (row["TOEFL Score"] - toefl) ** 2 +
+            (row["University Rating"] - uni_rating) ** 2 +
+            (row["SOP"] - sop) ** 2 +
+            (row["LOR "] - lor) ** 2 +
+            (row["CGPA"] - cgpa) ** 2 +
+            (row["Research"] - research_val) ** 2
+        )
+
+        # Get closest matching row
+        closest = row.loc[row["distance"].idxmin()]
+        actual_value = closest["Chance of Admit "] * 100  # convert to %
+
+        # --- Comparison Graph ---
+        fig, ax = plt.subplots()
+        ax.bar(["Model Prediction", "Closest Actual Value"], [percentage, actual_value], color=["blue", "green"])
+        ax.set_ylabel("Chance of Admission (%)")
+        ax.set_ylim(0, 100)
+        st.pyplot(fig)
+
+# At the very end of your app.py
+st.markdown("---")  # horizontal line
+st.caption("Made by Sahil Kumar , Harsh Sharma , Vinit")
