@@ -100,7 +100,7 @@ if st.button("Predict Admission Chance"):
 
         # --- Comparison Graph ---
         fig, ax = plt.subplots()
-        ax.bar(["Model Prediction", "Closest Actual Value"], [percentage, actual_value], color=["orange", "yellow"])
+        ax.bar(["Model Prediction", "Closest Actual Value"], [percentage, actual_value], color=["golden","silver"])
         ax.set_ylabel("Chance of Admission (%)")
         ax.set_ylim(0, 100)
         st.pyplot(fig)
