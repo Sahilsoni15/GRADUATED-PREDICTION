@@ -13,11 +13,11 @@ data = pd.read_csv("Admission_Predict_Ver1.1.csv")
 st.title("🎓 Graduate Admission Prediction App")
 
 # --- User Inputs ---
-gre = st.number_input("GRE Score (260 - 340)", min_value=260, max_value=340, step=1)
-toefl = st.number_input("TOEFL Score (0 - 120)", min_value=0, max_value=120, step=1)
+gre = st.number_input("GRE (Graduate Record Examination) (260 - 340)", min_value=260, max_value=340, step=1)
+toefl = st.number_input("TOEFL (Test of English as a Foreign Language) (0 - 120)", min_value=0, max_value=120, step=1)
 uni_rating = st.slider("University Rating (1-5)", 1, 5)
-sop = st.slider("SOP Strength (1-5)", 1.0, 5.0, step=0.5)
-lor = st.slider("LOR Strength (1-5)", 1.0, 5.0, step=0.5)
+sop = st.slider("SOP (Statement of Purpose) (1-5)", 1.0, 5.0, step=0.5)
+lor = st.slider("LOR (Letter of Recommendation) (1-5)", 1.0, 5.0, step=0.5)
 cgpa = st.number_input("CGPA (out of 10)", min_value=0.0, max_value=10.0, step=0.1)
 research = st.radio("Research Experience", ["No", "Yes"])
 research_val = 1 if research == "Yes" else 0
