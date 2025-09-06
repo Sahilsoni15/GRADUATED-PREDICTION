@@ -27,15 +27,15 @@ if st.button("Predict Admission Chance"):
     # --- Input validation ---
     missing_fields = []
     if gre == 0:
-        missing_fields.append("GRE Score")
+        missing_fields.append("GRE")
     if toefl == 0:
-        missing_fields.append("TOEFL Score")
+        missing_fields.append("TOEFL")
     if uni_rating == 0:
         missing_fields.append("University Rating")
     if sop == 0:
-        missing_fields.append("SOP Strength")
+        missing_fields.append("SOP")
     if lor == 0:
-        missing_fields.append("LOR Strength")
+        missing_fields.append("LOR")
     if cgpa == 0:
         missing_fields.append("CGPA")
     if research not in ["Yes", "No"]:
