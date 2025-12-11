@@ -107,4 +107,4 @@ if st.button("Predict Admission Chance"):
 
 # At the very end of your app.py
 st.markdown("---")  # horizontal line
-st.caption("Made by Sahil Kumar")
+st.caption("Made by Sahil Kumar, Harsh Sharma, Vinit,Ricky Kumar")
